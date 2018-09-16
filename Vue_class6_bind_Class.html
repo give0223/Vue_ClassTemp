@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js'></script>
+</head>
+<style>
+  #app{
+    text-align: center;
+  }
+  .submit{
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+  .submit.disable{
+    background-color: #aaa;
+  }
+</style>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="text">
+    <button :class="btnClass">Submit</button>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        text: '',
+        //3.宣告成陣列資料
+        // btnClass:[
+        //   'submit',
+        //   'disable'
+        // ]
+      },
+      computed: {
+        btnClass() {
+          // //1.條件判斷式回傳物件
+          // if(this.text.length === 0){
+          //   return{
+          //     submit:true,
+          //     disable:true
+          //   };
+          // }else{
+          //   return{
+          //     submit:true,
+          //     disable:false
+          //   };
+          // }
+
+          //2.直接回傳物件
+          return {
+            submit: true,
+            disable: this.text.length === 0,
+          };
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

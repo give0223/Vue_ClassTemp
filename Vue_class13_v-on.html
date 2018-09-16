@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js'></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 3.綁定'my-click'事件觸發clicked事件 -->
+    <component :is="compontentID" v-on:my-click="clicked"></component>
+  </div>
+
+  <script>
+
+    Vue.component('my-button',{
+      //1.點擊觸發component內的'myclick'事件
+      template:`
+        <button @click="myclick">my-button</button>
+      `,
+      methods:{
+        //2.發出自訂事件到Vue實體上的'my-click'事件
+        myclick(){
+          this.$emit('my-click',10,20,30,40);
+        }
+      },
+    });
+
+    new Vue({
+      el: '#app',
+      data:{
+        compontentID:'my-button'
+      },
+      methods:{
+        //4.最後通過my-click觸發到clicked事件
+        clicked(w,x,y,z){
+          alert(`you clicked ${w} ${x} ${y} ${z}`);
+        }
+      },
+    });
+  </script>
+</body>
+</html>

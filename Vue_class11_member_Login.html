@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js'></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <button @click="componentId='login-form'">Login Form</button>
+      <button @click="componentId='user-check'">Check User</button>
+    </div>
+    <hr>
+    <keep-alive>
+      <component :is="componentId"></component>
+    </keep-alive>
+    <!-- <user-check></user-check> -->
+    <!-- <login-form></login-form> -->
+  </div>
+
+  <script>
+    const API = 'http://localhost:3000';
+    //登入介面模組
+    Vue.component('login-form', {
+      data() {
+        return {
+          username: '',
+          password: '',
+          loggeUser: '',
+          error:'',
+          loading: false,
+        };
+      },
+      methods: {
+        submit() {
+          this.loading = true;
+          //回傳API登入使用者帳號&密碼
+          //使用axios函式庫ajax
+          axios.post(`${API}/login`, {
+            username: this.username,
+            password: this.password,
+          })
+          .then(response => {
+            this.loading = false;
+            //判斷使用者帳號密碼是否正確,並回傳訊息給使用者
+            if(response.data.success){
+              this.loggeUser = response.data.name;
+              // console.log(response);
+            }else{
+              this.error = 'Your account is Error';
+            }
+          })
+        },
+      },
+      //監聽使用者輸入帳號密碼,將錯誤訊息字串清空
+      watch: {
+        username(){
+          this.error = '';
+        },
+        password(){
+          this.error = '';
+        }
+      },
+      //登入介面模板
+      template: `
+        <div>
+          <h1 v-if="loggeUser">Welcome!! {{loggeUser}}</h1>
+          <form v-else @submit.prevent="submit">
+            <label>UserName</label>    
+            <input type="text" v-model="username" :disable="loading"/>
+            <br/>
+            <label>Password</label>    
+            <input type="password" v-model="password" :disable="loading"/>
+            <br/>
+            <button type="submit" :disable="loading">Submit</button>
+          </form>
+          <br/>
+          <span v-if="error">{{error}}<span>
+        </div>
+      `,
+    });
+    //檢查帳號是否存在模組
+    Vue.component('user-check',{
+      data(){
+        return{
+          username: '',
+          exists: false,
+        };
+      },
+      methods:{
+        checked(){
+          axios.get(`${API}/exists/${this.username}`)
+          .then(response =>{
+            this.exists = response.data.exists;
+          })  
+        },
+      },
+      //監聽使用者帳號變化,並呼叫延遲方法檢查
+      watch:{
+        username(){
+          this.checkDebounced();
+        }
+      },
+      //在Vue生成時載入lodash的debounce延遲方法
+      mounted() {
+        this.checkDebounced = _.debounce(this.checked,500);
+      },
+      //檢查帳號模版
+      template:`
+        <div>
+          <lable>Username</lable>
+          <input type="text" v-model="username"/>
+          <br/>
+          <span>{{exists}}</span>
+        </div>
+      `,
+    });
+
+    new Vue({
+      el: '#app',
+      data:{
+        componentId: 'login-form',
+      },
+    });
+  </script>
+</body>
+
+</html>

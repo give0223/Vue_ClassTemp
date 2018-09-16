@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js'></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 1.依序綁定posts物件給post的porps -->
+    <!-- <post v-for="post in posts" :text="post.text" :author="post.author"></post> -->
+    <!-- 2.直接使用v-bind綁定物件給post的props使用 -->
+    <post v-for="post in posts" v-bind="post"></post>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+        posts:[
+          {text: 'Hello', author:'Bob'},
+          {text: 'Find', author:'Jhon'},
+        ],
+      },
+      components:{
+        post:{
+          props:['text','author'],
+          template:'<div>{{author}}: {{text}}</div>',
+        },
+      }
+    });
+  </script>
+
+</body>
+</html>

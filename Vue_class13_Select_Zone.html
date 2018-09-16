@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js'></script>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+
+
+  <script>
+    const Allcities = [
+      {
+      "city": "臺北市",
+      "area": [
+        {
+          "zip": "100",
+          "#text": "中正區"
+        },
+        {
+          "zip": "103",
+          "#text": "大同區"
+        },
+        {
+          "zip": "104",
+          "#text": "中山區"
+        },
+        {
+          "zip": "105",
+          "#text": "松山區"
+        },
+        {
+          "zip": "106",
+          "#text": "大安區"
+        },
+        {
+          "zip": "108",
+          "#text": "萬華區"
+        },
+        {
+          "zip": "110",
+          "#text": "信義區"
+        },
+        {
+          "zip": "111",
+          "#text": "士林區"
+        },
+        {
+          "zip": "112",
+          "#text": "北投區"
+        },
+        {
+          "zip": "114",
+          "#text": "內湖區"
+        },
+        {
+          "zip": "115",
+          "#text": "南港區"
+        },
+        {
+          "zip": "116",
+          "#text": "文山區"
+        }
+      ]
+      },
+      {
+      "city": "新北市",
+      "area": [
+        {
+          "zip": "207",
+          "#text": "萬里區"
+        },
+        {
+          "zip": "208",
+          "#text": "金山區"
+        },
+        {
+          "zip": "220",
+          "#text": "板橋區"
+        },
+        {
+          "zip": "221",
+          "#text": "汐止區"
+        },
+        {
+          "zip": "222",
+          "#text": "深坑區"
+        },
+        {
+          "zip": "223",
+          "#text": "石碇區"
+        },
+        {
+          "zip": "224",
+          "#text": "瑞芳區"
+        },
+        {
+          "zip": "226",
+          "#text": "平溪區"
+        },
+        {
+          "zip": "227",
+          "#text": "雙溪區"
+        },
+        {
+          "zip": "228",
+          "#text": "貢寮區"
+        },
+        {
+          "zip": "231",
+          "#text": "新店區"
+        },
+        {
+          "zip": "232",
+          "#text": "坪林區"
+        },
+        {
+          "zip": "233",
+          "#text": "烏來區"
+        },
+        {
+          "zip": "234",
+          "#text": "永和區"
+        },
+        {
+          "zip": "235",
+          "#text": "中和區"
+        },
+        {
+          "zip": "236",
+          "#text": "土城區"
+        },
+        {
+          "zip": "237",
+          "#text": "三峽區"
+        },
+        {
+          "zip": "238",
+          "#text": "樹林區"
+        },
+        {
+          "zip": "239",
+          "#text": "鶯歌區"
+        },
+        {
+          "zip": "241",
+          "#text": "三重區"
+        },
+        {
+          "zip": "242",
+          "#text": "新莊區"
+        },
+        {
+          "zip": "243",
+          "#text": "泰山區"
+        },
+        {
+          "zip": "244",
+          "#text": "林口區"
+        },
+        {
+          "zip": "247",
+          "#text": "蘆洲區"
+        },
+        {
+          "zip": "248",
+          "#text": "五股區"
+        },
+        {
+          "zip": "249",
+          "#text": "八里區"
+        },
+        {
+          "zip": "251",
+          "#text": "淡水區"
+        },
+        {
+          "zip": "252",
+          "#text": "三芝區"
+        }
+      ]
+    },
+      {
+      "city": "基隆市",
+      "area": [
+        {
+          "zip": "200",
+          "#text": "仁愛區"
+        },
+        {
+          "zip": "201",
+          "#text": "信義區"
+        },
+        {
+          "zip": "202",
+          "#text": "中正區"
+        },
+        {
+          "zip": "203",
+          "#text": "中山區"
+        },
+        {
+          "zip": "204",
+          "#text": "安樂區"
+        },
+        {
+          "zip": "205",
+          "#text": "暖暖區"
+        },
+        {
+          "zip": "206",
+          "#text": "七堵區"
+        }
+      ]
+    },
+      {
+      "city": "宜蘭縣",
+      "area": [
+        {
+          "zip": "260",
+          "#text": "宜蘭市"
+        },
+        {
+          "zip": "261",
+          "#text": "頭城鎮"
+        },
+        {
+          "zip": "262",
+          "#text": "礁溪鄉"
+        },
+        {
+          "zip": "263",
+          "#text": "壯圍鄉"
+        },
+        {
+          "zip": "264",
+          "#text": "員山鄉"
+        },
+        {
+          "zip": "265",
+          "#text": "羅東鎮"
+        },
+        {
+          "zip": "266",
+          "#text": "三星鄉"
+        },
+        {
+          "zip": "267",
+          "#text": "大同鄉"
+        },
+        {
+          "zip": "268",
+          "#text": "五結鄉"
+        },
+        {
+          "zip": "269",
+          "#text": "冬山鄉"
+        },
+        {
+          "zip": "270",
+          "#text": "蘇澳鎮"
+        },
+        {
+          "zip": "272",
+          "#text": "南澳鄉"
+        }
+      ]
+    },
+      {
+      "city": "新竹市",
+      "area": [
+        {
+          "zip": "300",
+          "#text": "東區"
+        },
+        {
+          "zip": "300",
+          "#text": "北區"
+        },
+        {
+          "zip": "300",
+          "#text": "香山區"
+        }
+      ]
+    },
+      {
+      "city": "新竹縣",
+      "area": [
+        {
+          "zip": "302",
+          "#text": "竹北市"
+        },
+        {
+          "zip": "303",
+          "#text": "湖口鄉"
+        },
+        {
+          "zip": "304",
+          "#text": "新豐鄉"
+        },
+        {
+          "zip": "305",
+          "#text": "新埔鎮"
+        },
+        {
+          "zip": "306",
+          "#text": "關西鎮"
+        },
+        {
+          "zip": "307",
+          "#text": "芎林鄉"
+        },
+        {
+          "zip": "308",
+          "#text": "寶山鄉"
+        },
+        {
+          "zip": "310",
+          "#text": "竹東鎮"
+        },
+        {
+          "zip": "311",
+          "#text": "五峰鄉"
+        },
+        {
+          "zip": "312",
+          "#text": "橫山鄉"
+        },
+        {
+          "zip": "313",
+          "#text": "尖石鄉"
+        },
+        {
+          "zip": "314",
+          "#text": "北埔鄉"
+        },
+        {
+          "zip": "315",
+          "#text": "峨眉鄉"
+        }
+      ]
+    },
+      {
+      "city": "桃園縣",
+      "area": [
+        {
+          "zip": "320",
+          "#text": "中壢市"
+        },
+        {
+          "zip": "324",
+          "#text": "平鎮市"
+        },
+        {
+          "zip": "325",
+          "#text": "龍潭鄉"
+        },
+        {
+          "zip": "326",
+          "#text": "楊梅鎮"
+        },
+        {
+          "zip": "327",
+          "#text": "新屋鄉"
+        },
+        {
+          "zip": "328",
+          "#text": "觀音鄉"
+        },
+        {
+          "zip": "330",
+          "#text": "桃園市"
+        },
+        {
+          "zip": "333",
+          "#text": "龜山鄉"
+        },
+        {
+          "zip": "334",
+          "#text": "八德市"
+        },
+        {
+          "zip": "335",
+          "#text": "大溪鎮"
+        },
+        {
+          "zip": "336",
+          "#text": "復興鄉"
+        },
+        {
+          "zip": "337",
+          "#text": "大園鄉"
+        },
+        {
+          "zip": "338",
+          "#text": "蘆竹鄉"
+        }
+      ]
+    },
+      {
+      "city": "苗栗縣",
+      "area": [
+        {
+          "zip": "350",
+          "#text": "竹南鎮"
+        },
+        {
+          "zip": "351",
+          "#text": "頭份鎮"
+        },
+        {
+          "zip": "352",
+          "#text": "三灣鄉"
+        },
+        {
+          "zip": "353",
+          "#text": "南莊鄉"
+        },
+        {
+          "zip": "354",
+          "#text": "獅潭鄉"
+        },
+        {
+          "zip": "356",
+          "#text": "後龍鎮"
+        },
+        {
+          "zip": "357",
+          "#text": "通霄鎮"
+        },
+        {
+          "zip": "358",
+          "#text": "苑裡鎮"
+        },
+        {
+          "zip": "360",
+          "#text": "苗栗市"
+        },
+        {
+          "zip": "361",
+          "#text": "造橋鄉"
+        },
+        {
+          "zip": "362",
+          "#text": "頭屋鄉"
+        },
+        {
+          "zip": "363",
+          "#text": "公館鄉"
+        },
+        {
+          "zip": "364",
+          "#text": "大湖鄉"
+        },
+        {
+          "zip": "365",
+          "#text": "泰安鄉"
+        },
+        {
+          "zip": "366",
+          "#text": "銅鑼鄉"
+        },
+        {
+          "zip": "367",
+          "#text": "三義鄉"
+        },
+        {
+          "zip": "368",
+          "#text": "西湖鄉"
+        },
+        {
+          "zip": "369",
+          "#text": "卓蘭鎮"
+        }
+      ]
+    },
+      {
+      "city": "臺中市",
+      "area": [
+        {
+          "zip": "400",
+          "#text": "中區"
+        },
+        {
+          "zip": "401",
+          "#text": "東區"
+        },
+        {
+          "zip": "402",
+          "#text": "南區"
+        },
+        {
+          "zip": "403",
+          "#text": "西區"
+        },
+        {
+          "zip": "404",
+          "#text": "北區"
+        },
+        {
+          "zip": "406",
+          "#text": "北屯區"
+        },
+        {
+          "zip": "407",
+          "#text": "西屯區"
+        },
+        {
+          "zip": "408",
+          "#text": "南屯區"
+        },
+        {
+          "zip": "411",
+          "#text": "太平區"
+        },
+        {
+          "zip": "412",
+          "#text": "大裡區"
+        },
+        {
+          "zip": "413",
+          "#text": "霧峰區"
+        },
+        {
+          "zip": "414",
+          "#text": "烏日區"
+        },
+        {
+          "zip": "420",
+          "#text": "豐原區"
+        },
+        {
+          "zip": "421",
+          "#text": "後裡區"
+        },
+        {
+          "zip": "422",
+          "#text": "石岡區"
+        },
+        {
+          "zip": "423",
+          "#text": "東勢區"
+        },
+        {
+          "zip": "424",
+          "#text": "和平區"
+        },
+        {
+          "zip": "426",
+          "#text": "新社區"
+        },
+        {
+          "zip": "427",
+          "#text": "潭子區"
+        },
+        {
+          "zip": "428",
+          "#text": "大雅區"
+        },
+        {
+          "zip": "429",
+          "#text": "神岡區"
+        },
+        {
+          "zip": "432",
+          "#text": "大肚區"
+        },
+        {
+          "zip": "433",
+          "#text": "沙鹿區"
+        },
+        {
+          "zip": "434",
+          "#text": "龍井區"
+        },
+        {
+          "zip": "435",
+          "#text": "梧棲區"
+        },
+        {
+          "zip": "436",
+          "#text": "清水區"
+        },
+        {
+          "zip": "437",
+          "#text": "大甲區"
+        },
+        {
+          "zip": "438",
+          "#text": "外埔區"
+        },
+        {
+          "zip": "439",
+          "#text": "大安區"
+        }
+      ]
+    }
+    ];
+
+    Vue.component('Select',{
+      props:['value', 'options', 'label'],
+      computed:{
+        index:{
+          get(){
+            return this.value;
+          },
+          set(val){
+            //選擇city後將觸發new Vue的Select模板中的v-model的input事件,
+            //並傳入現在選到的index位置更新cityIdx數值
+            this.$emit('input',val);
+          }
+        },
+      },
+      methods:{
+        //判斷選擇列是否在縣市或區域
+        optionsText(item){
+          if(this.label === 'area'){
+            return item['#text']
+          }else{
+            return item['city'];
+          }
+        },
+      },
+      template:`
+        <select v-model="index">
+          <option v-for="(item,idx) in options" :value="idx">
+            {{optionsText(item)}}
+          </option>
+        </select>
+      `,
+    });
+
+    new Vue({
+      el: '#app',
+      data:{
+        cityIdx: 0,
+        areaIdx: 0,
+      },
+      computed:{
+        cities(){
+          return Allcities;
+        },
+        areas(){
+          return Allcities[this.cityIdx].area;
+        },
+        zip(){
+          return this.areas[this.areaIdx].zip;
+        }
+      },
+      watch:{
+        cityIdx(){
+          this.areaIdx = 0;
+        }
+      },
+      template:`
+        <div>
+          <h1>{{this.cityIdx}} - {{this.areaIdx}} - {{zip}}</h1>
+          <Select v-model="cityIdx" :options="cities" label="city"/>
+          <Select v-model="areaIdx" :options="areas" label="area"/>
+        </div>
+      `,
+
+    });
+  </script>
+
+</body>
+</html>

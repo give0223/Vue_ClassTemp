@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js'></script>
+</head>
+<body>
+  
+  <script>
+    const API = 'https://randomuser.me/api/?results=100';
+    //1.Callback
+    // function getemail(cb) {
+    //   $.getJSON(API,(data)=>{
+    //     cb(data)
+    //   })
+    // }
+
+    // getemail(function(email) {
+    //   console.log(email)
+    // });
+
+    //2.Promise
+    // function getemail() {
+    //   return new Promise((resolve) =>{
+    //     $.getJSON(API,(res) =>{
+    //       // console.log(res);
+    //       resolve(res.results[0].email);
+    //     });
+    //   });
+    // }
+    // getemail()
+    // .then((resmail) =>{
+    //   console.log(resmail);
+    //   return getemail();
+    // })
+    // .then((resmail2) =>{
+    //   console.log(resmail2)
+    // });
+
+    //3.async & await
+    function getemail() {
+      return new Promise((resolve) =>{
+        $.getJSON(API,(res) =>{
+          console.log(res.results[0].email);
+          resolve(res.results[0].email);
+        });
+      });
+    }
+
+    const emails = [];
+    async function getMutipleEmail() {
+      let email;
+      //呼叫執行1
+      email = await getemail();
+      emails.push(email);
+      //呼叫執行2
+      email = await getemail();
+      emails.push(email);
+      //呼叫執行3
+      email = await getemail();
+      emails.push(email);
+      //印出Email陣列
+      console.log(emails);
+    }
+
+    //執行async的function
+    getMutipleEmail();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js'></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="checkbox" v-model="checked1">
+    <input type="checkbox" v-model="checked2">
+    <h1 :style="H1style[0]" v-if="checked1">This is one!!!</h1>
+    <h1 :style="H1style[1]" v-else-if="checked2">This is two</h1>
+    <h1 :style="H1style[2]" v-else>This is three</h1>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+        checked1: false,
+        checked2: false,
+        H1style:[
+          {'color':'red'},
+          {'color':'green'},
+          {'color':'blue'}
+        ]
+      }
+    });
+  </script>
+</body>
+</html>

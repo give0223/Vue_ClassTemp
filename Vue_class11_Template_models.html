@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js'></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="content='lesson'">Lesson</button>
+    <button @click="content='apply'">Apply</button>
+    <br/>
+    <component :is="content"></component>
+  </div>
+
+  <script>
+    Vue.component('apply',{
+      template:`
+        <form>
+          <textarea></textarea>
+          <br/>
+          <button>Submit</button>
+        </form>
+      `,
+    });
+
+    Vue.component('lesson',{
+      template:`
+        <ul>
+          <li>Vue</li>
+          <li>React</li>
+          <li>HTML</li>
+        </ul>
+      `,
+    });
+
+    new Vue({
+      el: '#app',
+      data:{
+        content: 'lesson',
+      }
+    });
+  </script>
+</body>
+</html>
